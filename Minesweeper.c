@@ -15,6 +15,7 @@ void initializeBoard() {
         for (int j = 0; j < SIZE; j++) {
             board[i][j] = 0;
             revealed[i][j] = 0;
+	    revealedBoard[i][j] = 0;
         }
     }
 
