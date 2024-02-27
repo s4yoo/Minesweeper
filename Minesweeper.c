@@ -7,6 +7,7 @@
 
 int board[SIZE][SIZE];
 int revealed[SIZE][SIZE];
+int revealedBoard[SIZE][SIZE];
 
 void initializeBoard() {
     // 보드 초기화
@@ -24,6 +25,48 @@ void initializeBoard() {
         int y = rand() % SIZE;
         board[x][y] = -1;
     }
+	
+	for(int i = 0; i < SIZE; i++){
+		for(int j = 0; j < SIZE; j++){
+			if(board[i][j] != -1){
+				if(i == 0){
+					if(j == 0){
+						revealedBoard[i][j] = (board[i + 1][j] + board[i][j + 1] + board[i + 1][j + 1]) * -1;
+					} else if (j == 9){
+						revealedBoard[i][j] = (board[i + 1][j] + board[i][j - 1] + board[i + 1][j - 1]) * -1;
+					} else{
+						revealedBoard[i][j] = (board[i][j - 1] + board[i][j + 1] + board[i + 1][j - 1] + board[i + 1][j] + board[i + 1][j + 1]) * -1;
+					}
+				} else if (i == 9){
+					if(j == 0){
+						revealedBoard[i][j] = (board[i - 1][j] + board[i - 1][j + 1] + board[i][j + 1]) * -1;
+					} else if (j == 9){
+						revealedBoard[i][j] = (board[i][j - 1] + board[i - 1][j - 1] + board[i - 1][j]) * -1;
+					} else{
+						revealedBoard[i][j] = (board[i - 1][j - 1] + board[i - 1][j] + board[i - 1][j + 1] + board[i][j - 1] + board[i][j - 1]) * -1;
+					}
+				} else if (j == 0){
+					if(i == 0)
+						continue;
+					if(i == 9)
+						continue;
+					revealedBoard[i][j] = (board[i - 1][j] + board[i - 1][j + 1] + board[i + 1][j + 1] + board[i + 1][j] + board[i + 1][j + 1]) * -1;
+				} else if (j == 9){
+					if(i == 0)
+						continue;
+					if(i == 9)
+						continue;
+					revealedBoard[i][j] = (board[i - 1][j - 1] + board[i - 1][j] + board[i][j - 1] + board[i + 1][j - 1] + board[i + 1][j]) * -1;
+				} else {
+					revealedBoard[i][j] = (board[i - 1][j - 1] + board[i -1][j] + board[i - 1][j + 1] + board[i][j - 1] + board[i][j + 1] + board[i + 1][j - 1] + board[i + 1][j] + board[i + 1][j + 1]) * -1;
+				}
+			} else {
+				revealedBoard[i][j] = -1;
+			}
+			printf("%d ", revealedBoard[i][j]);
+		}
+		printf("\n");
+	}
 }
 
 void printBoard() {
@@ -40,7 +83,7 @@ void printBoard() {
                 if (board[i][j] == -1) {
                     printf("* ");
                 } else {
-                    printf("%d ", board[i][j]);
+                    printf("%d ", revealedBoard[i][j]);
                 }
             } else {
                 printf(". ");
