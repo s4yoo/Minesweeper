@@ -45,21 +45,12 @@ void initializeBoard() {
 					} else{
 						revealedBoard[i][j] = (board[i - 1][j - 1] + board[i - 1][j] + board[i - 1][j + 1] + board[i][j - 1] + board[i][j - 1]) * -1;
 					}
-				} else if (j == 0){
-					if(i == 0)
-						continue;
-					if(i == 9)
-						continue;
+				} else if (j == 0)
 					revealedBoard[i][j] = (board[i - 1][j] + board[i - 1][j + 1] + board[i + 1][j + 1] + board[i + 1][j] + board[i + 1][j + 1]) * -1;
-				} else if (j == 9){
-					if(i == 0)
-						continue;
-					if(i == 9)
-						continue;
+				 else if (j == 9)
 					revealedBoard[i][j] = (board[i - 1][j - 1] + board[i - 1][j] + board[i][j - 1] + board[i + 1][j - 1] + board[i + 1][j]) * -1;
-				} else {
+				 else
 					revealedBoard[i][j] = (board[i - 1][j - 1] + board[i -1][j] + board[i - 1][j + 1] + board[i][j - 1] + board[i][j + 1] + board[i + 1][j - 1] + board[i + 1][j] + board[i + 1][j + 1]) * -1;
-				}
 			} else {
 				revealedBoard[i][j] = -1;
 			}
